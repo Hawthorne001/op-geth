@@ -12,12 +12,14 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
+// along with go-ethereum. If not, see <http//www.gnu.org/licenses/>.
+
 package era
 
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"io"
 	"math/big"
@@ -158,7 +160,7 @@ func (b *Builder) AddRLP(header, body, receipts []byte, number uint64, hash comm
 // corresponding e2store entries.
 func (b *Builder) Finalize() (common.Hash, error) {
 	if b.startNum == nil {
-		return common.Hash{}, fmt.Errorf("finalize called on empty builder")
+		return common.Hash{}, errors.New("finalize called on empty builder")
 	}
 	// Compute accumulator root and write entry.
 	root, err := ComputeAccumulator(b.hashes, b.tds)

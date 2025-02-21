@@ -37,7 +37,6 @@ var (
 	bedrockGenesisTestConfig = func() *params.ChainConfig {
 		conf := *params.AllCliqueProtocolChanges // copy the config
 		conf.Clique = nil
-		conf.TerminalTotalDifficultyPassed = true
 		conf.BedrockBlock = big.NewInt(0)
 		conf.Optimism = &params.OptimismConfig{EIP1559Elasticity: 50, EIP1559Denominator: 10}
 		return &conf
@@ -501,7 +500,7 @@ func TestReceiptJSON(t *testing.T) {
 		r := Receipt{}
 		err = r.UnmarshalJSON(b)
 		if err != nil {
-			t.Fatal("error unmarshaling receipt from json:", err)
+			t.Fatal("error unmarshalling receipt from json:", err)
 		}
 
 		// Make sure marshal/unmarshal doesn't affect receipt hash root computation by comparing
@@ -530,7 +529,7 @@ func TestEffectiveGasPriceNotRequired(t *testing.T) {
 	r2 := Receipt{}
 	err = r2.UnmarshalJSON(b)
 	if err != nil {
-		t.Fatal("error unmarshaling receipt from json:", err)
+		t.Fatal("error unmarshalling receipt from json:", err)
 	}
 }
 
